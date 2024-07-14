@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "0 0 */6 * *"
+    - cron: "0 0 */9 * *"
 
 env:
   GIT_AUTHOR_NAME: mollybeach
