@@ -10,6 +10,27 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY }}
+      NEXT_PUBLIC_MORALIS_WEBHOOK: ${{ secrets.MORALIS_WEBHOOK }}
+      NEXT_PUBLIC_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      NEXT_PUBLIC_NEXTAUTH_URL: "https://mollybeach.github.io/token-gating-discord-bot-api"
+      NEXT_PUBLIC_NEXTAUTH_NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
+      NEXT_PUBLIC_USERS_ENDPOINT: ${{ secrets.USERS_ENDPOINT }}
+      NEXT_PUBLIC_TOKENS_ENDPOINT: ${{ secrets.TOKENS_ENDPOINT }}
+      NEXT_PUBLIC_DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+      NEXT_PUBLIC_DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+      NEXT_PUBLIC_DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+      NEXT_PUBLIC_DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+      NEXT_PUBLIC_DISCORD_USER_ID: ${{ secrets.DISCORD_USER_ID }}
+      NEXT_PUBLIC_DISCORD_GRYFFINDOR_ROLE_ID: ${{ secrets.DISCORD_GRYFFINDOR_ROLE_ID }}
+      NEXT_PUBLIC_DISCORD_HUFFLEPUFF_ROLE_ID: ${{ secrets.DISCORD_HUFFLEPUFF_ROLE_ID }}
+      NEXT_PUBLIC_DISCORD_SLYTHERIN_ROLE_ID: ${{ secrets.DISCORD_SLYTHERIN_ROLE_ID }}
+      NEXT_PUBLIC_DISCORD_RAVENCLAW_ROLE_ID: ${{ secrets.DISCORD_RAVENCLAW_ROLE_ID }}
+      NEXT_PUBLIC_CONTRACT_ADDRESS: ${{ secrets.CONTRACT_ADDRESS }}
+      NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{ secrets.THIRDWEB_CLIENT_ID }}
+      NEXT_PUBLIC_THIRDWEB_SECRET_KEY: ${{ secrets.THIRDWEB_SECRET_KEY }}
+      NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
 
     steps:
       - name: Checkout
@@ -25,7 +46,11 @@ jobs:
       - name: Install Dependencies
         working-directory: docs
         run: |
-          npm install
+          npm install --legacy-peer-deps
+          
+      - name: Build
+        working-directory: docs
+        run: |
           npm run build
           npm run export
         env:
