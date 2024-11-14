@@ -2,6 +2,14 @@
 
 This project involves a discord bot that curates access to a discord server based on verified user funds of specific token(s). The discord bot interfaces with a smart contract and accounts for user's relevant token holdings upon registration. This information is then stored onto a db using the serverless api where updated data entries are made based on a moralis connected webhook from respective smart contract.
 
+## Features
+
+- Serverless API
+- Next.js Client
+- Smart Contract
+- WalletConnect
+- Thirdweb
+
 # VS Code Remote Development
 
 Visual Studio Code Remote Development allows you to use a container, remote machine, or the Windows Subsystem for Linux (WSL) as a full-featured development environment. You can:

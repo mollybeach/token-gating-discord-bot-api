@@ -1,62 +1,60 @@
-import { useAddress, useSDK } from "@thirdweb-dev/react";
+import { ConnectButton, useActiveAccount, ThirdwebProvider } from "thirdweb/react";
+import { createThirdwebClient } from "thirdweb";
 import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
-import SignIn from "../components/SignIn";
 import styles from "../styles/Home.module.css";
 
+console.log('Client ID:', process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID);
+
+
 const Home: NextPage = () => {
-  const address = useAddress(); // Get the user's address
-  const { data: session } = useSession(); // Get the user's session which contains the user's address
-  const sdk = useSDK(); // Get the Thirdweb SDK
+  // Move client creation inside the component
+  const client = createThirdwebClient({
+    clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID as string,
+    secretKey: process.env.NEXT_PUBLIC_THIRDWEB_SECRET_KEY as string
+  });
+
+  return (
+    <ThirdwebProvider>
+      <div className={styles.container}>
+        <ConnectButton client={client} />
+        <HomeContent />
+      </div>
+    </ThirdwebProvider>
+  );
+};
+
+// Move the content to a separate component to use the hook
+function HomeContent() {
+  const account = useActiveAccount();
 
   async function requestGrantRole() {
-    // First, login and sign a message
-    const loginPayload = await sdk?.auth.login("http://localhost:3000"); // This will open a modal to login and sign a message
-    // Then make a request to our API endpoint.
     try {
+      if (!account) return;
+      
       const response = await fetch("api/grant-role", {
         method: "POST",
         body: JSON.stringify({
-          loginPayload // This is the payload you got from the login step,
+          address: account.address
         }),
       });
-
       const data = await response.json();
-      console.log('data');
       console.log(data);
-      // have the alert read the console and format the message
-      (function() {
-        var exLog = console.log;
-        console.log = function(msg) {
-            // @ts-ignore
-            exLog.apply(this, arguments);
-            msg = JSON.stringify(msg, null, 4);
-            // remove the first and last characters
-            msg = msg.substring(18, msg.length - 3);
-            alert(msg);
-        }
-    })();
-    console.log(data);
-      //alert("Check the console for the response!"); 
     } catch (e) {
       console.error(e);
     }
   }
 
   return (
-    <div>
-      <div className={styles.container} style={{ marginTop: 0 }}>
-        <SignIn />
-        {address && session && (
-          <div className={styles.collectionContainer}>
-            <button className={styles.mainButton} onClick={requestGrantRole}>
-              Give me the role!
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+    <>
+      {account && (
+        <div className={styles.collectionContainer}>
+          <button className={styles.mainButton} onClick={requestGrantRole}>
+            Give me the role!
+          </button>
+        </div>
+      )}
+    </>
   );
-};
+}
 
 export default Home;

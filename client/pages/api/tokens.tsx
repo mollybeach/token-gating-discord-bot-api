@@ -1,6 +1,6 @@
 
 export async function createToken(token_id: number, token_roles: [], type: string) {
-    const response = await fetch(`${process.env.TOKENS_ENDPOINT}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_TOKENS_ENDPOINT}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function createToken(token_id: number, token_roles: [], type: strin
 }
 
 export async function getToken(token_id: number) {
-    const response = await fetch(`${process.env.TOKENS_ENDPOINT}/${token_id}`,{
+    const response = await fetch(`${process.env.NEXT_PUBLIC_TOKENS_ENDPOINT}/${token_id}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export async function getToken(token_id: number) {
 
 }
 export async function updateToken(token_id: number, token_roles: [], type: string) {
-    const response = await fetch(`${process.env.TOKENS_ENDPOINT}/${token_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_TOKENS_ENDPOINT}/${token_id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export async function updateToken(token_id: number, token_roles: [], type: strin
     return data;
 }
 export async function deleteToken(token_id: number) {
-    const response = await fetch(`${process.env.TOKENS_ENDPOINT}/${token_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_TOKENS_ENDPOINT}/${token_id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export async function deleteToken(token_id: number) {
     return data;
 }
 export async function getAllTokens() {
-    const response = await fetch(`${process.env.TOKENS_ENDPOINT}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_TOKENS_ENDPOINT}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -4,10 +4,10 @@ import { assignMessage } from "./message";
 
 export async function grantDiscordRole(user_id: string, role_id: string) {
     const response = await fetch(
-        `https://discordapp.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user_id}/roles/${role_id}`,
+        `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_DISCORD_GUILD_ID}/members/${user_id}/roles/${role_id}`,
         {
           headers: {
-            Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,  // Use the bot token to authenticate the request
+            Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN}`,  // Use the bot token to authenticate the request
           },
           method: "PUT",
         }
@@ -17,10 +17,10 @@ export async function grantDiscordRole(user_id: string, role_id: string) {
 }
 export async function removeDiscordRole(user_id: string, role_id: string) {
     const response = await fetch(
-        `https://discordapp.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user_id}/roles/${role_id}`,
+        `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_DISCORD_GUILD_ID}/members/${user_id}/roles/${role_id}`,
         {
           headers: {
-            Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,  // Use the bot token to authenticate the request
+            Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN}`,  // Use the bot token to authenticate the request
           },
           method: "DELETE",
         }
@@ -30,10 +30,10 @@ export async function removeDiscordRole(user_id: string, role_id: string) {
 }
 export async function hasDiscordRole(user_id: string, role_id: string) {
     const response = await fetch(
-        `https://discordapp.com/api/guilds/${process.env.DISCORD_GUILD_ID}/members/${user_id}/roles/${role_id}`,
+        `https://discordapp.com/api/guilds/${process.env.NEXT_PUBLIC_DISCORD_GUILD_ID}/members/${user_id}/roles/${role_id}`,
         {
           headers: {
-            Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,  // Use the bot token to authenticate the request
+            Authorization: `Bot ${process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN}`,  // Use the bot token to authenticate the request
           },
           method: "GET",
         }

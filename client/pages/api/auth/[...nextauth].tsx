@@ -1,6 +1,5 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
-require("dotenv").config();
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
@@ -10,6 +9,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
 
   // When the user signs in, get their token
   callbacks: {

@@ -1,6 +1,6 @@
 
 export async function createUser(user_id: string, public_address?: string, tokens? : [], roles?: []) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export async function createUser(user_id: string, public_address?: string, token
     return data;
 }
 export async function getUser(user_id: string) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}/${user_id}`,{
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}/${user_id}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export async function getUser(user_id: string) {
     return data;
 }
 export async function updateUser(user_id: string, public_address?: string, tokens? : [], user_roles?: []) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}/${user_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}/${user_id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export async function updateUser(user_id: string, public_address?: string, token
 }
 
 export async function deleteUser(user_id: string) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}/${user_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}/${user_id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export async function deleteUser(user_id: string) {
 }
 // get all users
 export async function getAllUsers() {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function getAllUsers() {
 }
 // see if user has a particular role
 export async function userHasRole(user_id: string, role_id: string) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}/${user_id}`,{
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}/${user_id}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export async function userHasRole(user_id: string, role_id: string) {
 }
 // see if user has a particular token
 export async function userHasToken(user_id: string, token_id: number) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}/${user_id}`,{
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}/${user_id}`,{
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export async function userHasToken(user_id: string, token_id: number) {
 }
 // empty user tokens
 export async function emptyUser(user_id: string) {
-    const response = await fetch(`${process.env.USERS_ENDPOINT}/${user_id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_USERS_ENDPOINT}/${user_id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
