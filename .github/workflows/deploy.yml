@@ -3,7 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
+      - main
       - master
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -16,15 +18,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './docs/package-lock.json'
 
       - name: Install Dependencies
         working-directory: docs
-        run: npm ci
-
-      - name: Build
-        working-directory: docs
         run: |
+          npm install
           npm run build
           npm run export
         env:
@@ -32,15 +33,8 @@ jobs:
 
       - name: Add .nojekyll files
         run: |
-          # Add .nojekyll to root
           touch .nojekyll
-          # Add .nojekyll to docs
           touch docs/.nojekyll
-          # Add .nojekyll to build output
-          touch docs/out/.nojekyll
-          # Copy build files to docs
-          cp -r docs/out/* docs/
-          rm -rf docs/out
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4

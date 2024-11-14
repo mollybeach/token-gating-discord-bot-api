@@ -4,11 +4,13 @@
   "description": "Client for the Token Gating Discord Bot Api",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "local": "npm run build && npm run start",
     "export": "next export",
     "lint": "next lint"
   },
