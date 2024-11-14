@@ -1,6 +1,7 @@
 {
   "name": "client",
   "author": "Molly Beach",
+  "description": "Client for the Token Gating Discord Bot Api",
   "version": "0.1.0",
   "private": true,
   "scripts": {
