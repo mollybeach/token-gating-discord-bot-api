@@ -81,6 +81,7 @@ http://localhost:3009/transfers - POST
 ```
 # Project Setup
 To run this project, you will need to:
+The client folder name has been changed to docs to run on github pages
 install all dependencies for both the server and client
 start the server and client
 ```
