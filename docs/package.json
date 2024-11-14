@@ -10,7 +10,9 @@
   "scripts": {
     "build": "next build",
     "start": "next start",
-    "dev": "next dev"
+    "dev": "next dev",
+    "export": "next build && next export",
+    "lint": "next lint"
   },
   "dependencies": {
     "@thirdweb-dev/react": "^3.16.5",
