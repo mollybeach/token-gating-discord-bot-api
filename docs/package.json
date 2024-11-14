@@ -8,10 +8,9 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev"
   },
   "dependencies": {
     "@thirdweb-dev/react": "^3.16.5",
@@ -21,19 +20,14 @@
     "ethers": "^5.7.2",
     "next": "^14.1.0",
     "next-auth": "^4.24.6",
-    "npm-check-updates": "^16.14.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "thirdweb": "^5.68.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.0",
-    "@babel/preset-react": "^7.25.9",
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.57",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "eslint": "^8.56.0",
-    "eslint-config-next": "^14.1.0",
+    "@types/react": "^18.3.12",
+    "eslint": "^9.14.0",
+    "eslint-config-next": "^15.0.3",
     "typescript": "^5.3.3"
   }
 }
