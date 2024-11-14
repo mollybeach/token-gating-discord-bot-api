@@ -92,7 +92,7 @@ For Server:
 http://localhost:3009/
 For Client:
 http://localhost:3000/
-```
+
 # Project Structure
 ```
 token-gating-discord-bot-api/

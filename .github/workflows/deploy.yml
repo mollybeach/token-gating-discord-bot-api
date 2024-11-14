@@ -6,31 +6,38 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: client
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
 
       - name: Install Dependencies
-        run: |
-          cd client
-          npm install
+        run: npm ci
 
-      - name: Build
+      - name: Build and Export
         run: |
-          cd client
           npm run build
           npm run export
           touch out/.nojekyll
+        env:
+          NEXT_PUBLIC_BASE_PATH: /token-gating-discord-bot-api
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: client/out 
+          folder: client/out
+          clean: true
