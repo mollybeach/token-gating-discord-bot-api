@@ -5,7 +5,7 @@
     "private": true,
     "scripts": {
       "server": "cd ./src && npm i && npm run local",
-      "client": "cd ./client && npm i && npm run local",
+      "client": "cd ./docs && npm i && npm run local",
       "project": "npm run server && npm run client"
     }
 }
