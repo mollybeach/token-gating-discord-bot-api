@@ -59,8 +59,8 @@ jobs:
       - name: Build
         working-directory: docs
         run: npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: /token-gating-discord-bot-api
+       # env:
+         # NEXT_PUBLIC_BASE_PATH: /token-gating-discord-bot-api
 
       - name: Add .nojekyll files
         run: |
