@@ -7,6 +7,11 @@ const nextConfig = {
       autoprefixer: {},
     },
   },
+  images: {
+    unoptimized: true,
+    domains: ['images.ctfassets.net'], // Add this for your image domains
+  },
+  output: 'export', // Modern way to enable static export
   env: {
     // Thirdweb
     NEXT_PUBLIC_THIRDWEB_CLIENT_ID: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID || '',
