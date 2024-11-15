@@ -15,21 +15,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@thirdweb-dev/react": "^3.16.5",
-    "@thirdweb-dev/sdk": "^3.10.67",
+    "@thirdweb-dev/react": "^3.14.40",
+    "@thirdweb-dev/sdk": "^3.10.60",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "ethers": "^5.7.2",
-    "next": "^14.1.0",
-    "next-auth": "^4.24.6",
+    "next": "^14.2.18",
+    "next-auth": "^4.24.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "thirdweb": "^5.68.0"
+    "thirdweb": "^5.61.6"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.2.57",
     "eslint": "^9.14.0",
-    "eslint-config-next": "^15.0.3",
+    "eslint-config-next": "^14.2.18",
     "typescript": "^5.3.3"
   }
 }
