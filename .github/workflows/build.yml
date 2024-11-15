@@ -46,8 +46,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.npm
             ${{ github.workspace }}/docs/.next/cache
+            ${{ github.workspace }}/docs/node_modules/.cache
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
@@ -58,9 +58,7 @@ jobs:
         
       - name: Build
         working-directory: docs
-        run: |
-          npm run build
-          npm run export
+        run: npm run build
         env:
           NEXT_PUBLIC_BASE_PATH: /token-gating-discord-bot-api
 

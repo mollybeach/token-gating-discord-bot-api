@@ -50,9 +50,8 @@ jobs:
           
       - name: Build
         working-directory: docs
-        run: |
+        run: 
           npm run build
-          npm run export
         env:
           NEXT_PUBLIC_BASE_PATH: /token-gating-discord-bot-api
 

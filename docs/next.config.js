@@ -20,6 +20,15 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true
   },
+  experimental: {
+    // Enable build cache
+    turbotrace: {
+      logLevel: "error",
+      logDetail: true,
+    }
+  },
+  // Configure build cache directory
+  distDir: '.next',
   generateBuildId: async () => {
     return 'build-' + Date.now()
   }
