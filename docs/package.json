@@ -9,7 +9,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "build": "next build && touch out/.nojekyll",
+    "build": "next build && next export",
     "start": "next start",
     "dev": "next dev",
     "export": "next build && next export",
