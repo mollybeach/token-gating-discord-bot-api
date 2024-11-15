@@ -1,0 +1,189 @@
+// package.json
+{
+  "name": "client",
+  "author": "Molly Beach",
+  "description": "Client for the Token Gating Discord Bot Api",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "next build",
+    "start": "next start",
+    "dev": "next dev",
+    "export": "next build && next export",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@thirdweb-dev/react": "^3.14.40",
+    "@thirdweb-dev/sdk": "^3.10.60",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5",
+    "ethers": "^5.7.2",
+    "next": "^14.2.18",
+    "next-auth": "^4.24.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "thirdweb": "^5.61.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.2.57",
+    "eslint": "^9.14.0",
+    "eslint-config-next": "^14.2.18",
+    "typescript": "^5.3.3"
+  }
+}
+// .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY }}
+      NEXT_PUBLIC_MORALIS_WEBHOOK: ${{ secrets.MORALIS_WEBHOOK }}
+      NEXT_PUBLIC_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      NEXT_PUBLIC_NEXTAUTH_URL: "https://mollybeach.github.io/token-gating-discord-bot-api"
+      NEXT_PUBLIC_NEXTAUTH_NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
+      NEXT_PUBLIC_USERS_ENDPOINT: ${{ secrets.USERS_ENDPOINT }}
+      NEXT_PUBLIC_TOKENS_ENDPOINT: ${{ secrets.TOKENS_ENDPOINT }}
+      NEXT_PUBLIC_DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+      NEXT_PUBLIC_DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+      NEXT_PUBLIC_DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+      NEXT_PUBLIC_DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+      NEXT_PUBLIC_DISCORD_USER_ID: ${{ secrets.DISCORD_USER_ID }}
+      NEXT_PUBLIC_DISCORD_GRYFFINDOR_ROLE_ID: ${{ secrets.DISCORD_GRYFFINDOR_ROLE_ID }}
+      NEXT_PUBLIC_DISCORD_HUFFLEPUFF_ROLE_ID: ${{ secrets.DISCORD_HUFFLEPUFF_ROLE_ID }}
+      NEXT_PUBLIC_DISCORD_SLYTHERIN_ROLE_ID: ${{ secrets.DISCORD_SLYTHERIN_ROLE_ID }}
+      NEXT_PUBLIC_DISCORD_RAVENCLAW_ROLE_ID: ${{ secrets.DISCORD_RAVENCLAW_ROLE_ID }}
+      NEXT_PUBLIC_CONTRACT_ADDRESS: ${{ secrets.CONTRACT_ADDRESS }}
+      NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{ secrets.THIRDWEB_CLIENT_ID }}
+      NEXT_PUBLIC_THIRDWEB_SECRET_KEY: ${{ secrets.THIRDWEB_SECRET_KEY }}
+      NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './docs/package-lock.json'
+
+      - name: Install Dependencies
+        working-directory: docs
+        run: |
+          npm install --legacy-peer-deps
+          
+      - name: Build
+        working-directory: docs
+        run: 
+          npm run build
+       # env:
+          #NEXT_PUBLIC_BASE_PATH: /token-gating-discord-bot-api
+
+      - name: Add .nojekyll files
+        run: |
+          touch .nojekyll
+          touch docs/.nojekyll
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./docs/out
+          branch: gh-pages
+          clean: true
+
+// ts config
+
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["node"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
+
+// next config
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
+  env: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXT_PUBLIC_THIRDWEB_CLIENT_ID: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
+    NEXT_PUBLIC_THIRDWEB_SECRET_KEY: process.env.NEXT_PUBLIC_THIRDWEB_SECRET_KEY
+  },
+  distDir: 'out',
+  output: 'next',
+  experimental: {
+    forceSwcTransforms: true
+  },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true
+  },
+  experimental: {
+    // Enable build cache
+    turbotrace: {
+      logLevel: "error",
+      logDetail: true,
+    }
+  },
+  // Configure build cache directory
+  distDir: '.next',
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  }
+}
+
+module.exports = nextConfig
+
+
+// different next config
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
+  output: 'export',
+  basePath: process.env.NODE_ENV === 'production' ? '/token-gating-discord-bot-api' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/token-gating-discord-bot-api/' : '',
+  trailingSlash: true,
+}
+
+module.exports = nextConfig
+
+

@@ -1,38 +1,30 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    unoptimized: true,
-  },
   env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL || 'http://localhost:3000',
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXT_PUBLIC_MORALIS_API_KEY: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
+    NEXT_PUBLIC_MORALIS_WEBHOOK: process.env.NEXT_PUBLIC_MORALIS_WEBHOOK,
+    NEXT_PUBLIC_NEXTAUTH_SECRET: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
+    NEXT_PUBLIC_NEXTAUTH_NEXT_PUBLIC_DOMAIN: process.env.NEXT_PUBLIC_NEXTAUTH_NEXT_PUBLIC_DOMAIN,
+    NEXT_PUBLIC_NEXTAUTH_URL: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+    NEXT_PUBLIC_USERS_ENDPOINT: process.env.NEXT_PUBLIC_USERS_ENDPOINT,
+    NEXT_PUBLIC_TOKENS_ENDPOINT: process.env.NEXT_PUBLIC_TOKENS_ENDPOINT,
+    NEXT_PUBLIC_USERS_ENDPOINT_LOCAL: process.env.NEXT_PUBLIC_USERS_ENDPOINT_LOCAL,
+    NEXT_PUBLIC_TOKENS_ENDPOINT_LOCAL: process.env.NEXT_PUBLIC_TOKENS_ENDPOINT_LOCAL,
+    NEXT_PUBLIC_DISCORD_CLIENT_ID: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID,
+    NEXT_PUBLIC_DISCORD_CLIENT_SECRET: process.env.NEXT_PUBLIC_DISCORD_CLIENT_SECRET,
+    NEXT_PUBLIC_DISCORD_BOT_TOKEN: process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN,
+    NEXT_PUBLIC_DISCORD_GUILD_ID: process.env.NEXT_PUBLIC_DISCORD_GUILD_ID,
+    NEXT_PUBLIC_DISCORD_USER_ID: process.env.NEXT_PUBLIC_DISCORD_USER_ID,
     NEXT_PUBLIC_THIRDWEB_CLIENT_ID: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
-    NEXT_PUBLIC_THIRDWEB_SECRET_KEY: process.env.NEXT_PUBLIC_THIRDWEB_SECRET_KEY
+    NEXT_PUBLIC_THIRDWEB_SECRET_KEY: process.env.NEXT_PUBLIC_THIRDWEB_SECRET_KEY,
+    NEXT_PUBLIC_NODE_ENV: process.env.NEXT_PUBLIC_NODE_ENV,
   },
-  distDir: 'out',
-  output: 'export',
-  experimental: {
-    forceSwcTransforms: true
-  },
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true
-  },
-  experimental: {
-    // Enable build cache
-    turbotrace: {
-      logLevel: "error",
-      logDetail: true,
-    }
-  },
-  // Configure build cache directory
-  distDir: '.next',
-  generateBuildId: async () => {
-    return 'build-' + Date.now()
-  }
-}
+  basePath:
+    process.env.NEXT_PUBLIC_NODE_ENV === "production"
+      ? '/token-gating-discord-bot-api'
+      : undefined,
+};
 
-module.exports = nextConfig
-
+module.exports = nextConfig;

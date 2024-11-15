@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage": "https://mollybeach.github.io/token-gating-discord-bot-api",
   "author": "Molly Beach",
   "description": "Client for the Token Gating Discord Bot Api",
   "version": "0.1.0",
@@ -12,7 +13,9 @@
     "start": "next start",
     "dev": "next dev",
     "export": "next build && next export",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d out"
   },
   "dependencies": {
     "@thirdweb-dev/react": "^3.14.40",
@@ -31,6 +34,7 @@
     "@types/react": "^18.2.57",
     "eslint": "^9.14.0",
     "eslint-config-next": "^14.2.18",
+    "gh-pages": "^6.2.0",
     "typescript": "^5.3.3"
   }
 }

@@ -15,6 +15,7 @@ const Home: NextPage = () => {
 
   return (
     <ThirdwebProvider>
+      <div>Connect to Discord Community</div>
       <div className={styles.container}>
         <ConnectButton client={client} />
         <HomeContent />
