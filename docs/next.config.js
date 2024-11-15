@@ -11,7 +11,7 @@ const nextConfig = {
     NEXT_PUBLIC_THIRDWEB_SECRET_KEY: process.env.NEXT_PUBLIC_THIRDWEB_SECRET_KEY
   },
   distDir: 'out',
-  output: 'next',
+  output: 'export',
   experimental: {
     forceSwcTransforms: true
   },
