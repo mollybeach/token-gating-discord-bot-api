@@ -1,14 +1,22 @@
-name: Deploy to GitHub Pages
-
+name: Build and Deploy
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
   workflow_dispatch:
+
+# Add these permissions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY }}
@@ -31,39 +39,46 @@ jobs:
       NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{ secrets.THIRDWEB_CLIENT_ID }}
       NEXT_PUBLIC_THIRDWEB_SECRET_KEY: ${{ secrets.THIRDWEB_SECRET_KEY }}
       NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
-
+    
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
+      
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
           cache-dependency-path: './docs/package-lock.json'
-
+          
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ github.workspace }}/docs/.next/cache
+            ${{ github.workspace }}/docs/node_modules/.cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      
       - name: Install Dependencies
         working-directory: docs
         run: |
           npm install --legacy-peer-deps
-          
+          npm install styled-jsx typescript @types/node @swc/helpers --save-dev
+        
       - name: Build
         working-directory: docs
-        run: 
-          npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: '/token-gating-discord-bot-api'
+        run: npm run build
 
-      - name: Add .nojekyll files
-        run: |
-          touch .nojekyll
-          touch docs/.nojekyll
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: docs/out
-          branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
-          clean: true
+          path: docs/out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -6,8 +6,17 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+# Add these permissions
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY }}
@@ -18,7 +27,7 @@ jobs:
       NEXT_PUBLIC_USERS_ENDPOINT: ${{ secrets.USERS_ENDPOINT }}
       NEXT_PUBLIC_TOKENS_ENDPOINT: ${{ secrets.TOKENS_ENDPOINT }}
       NEXT_PUBLIC_DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
-      NEXT_PUBLIC_DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+      NEXT_PUBLIC_DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }} 
       NEXT_PUBLIC_DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
       NEXT_PUBLIC_DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
       NEXT_PUBLIC_DISCORD_USER_ID: ${{ secrets.DISCORD_USER_ID }}
@@ -54,23 +63,22 @@ jobs:
       
       - name: Install Dependencies
         working-directory: docs
-        run: npm install --legacy-peer-deps
+        run: |
+          npm install --legacy-peer-deps
+          npm install styled-jsx typescript @types/node @swc/helpers --save-dev
         
       - name: Build
         working-directory: docs
         run: npm run build
-        env:
-          NEXT_PUBLIC_BASE_PATH: '/token-gating-discord-bot-api'
 
-      - name: Add .nojekyll files
-        run: |
-          touch .nojekyll
-          touch docs/.nojekyll
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: docs/out
-          branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
-          clean: true
+          path: docs/out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
