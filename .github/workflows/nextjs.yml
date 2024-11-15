@@ -57,8 +57,9 @@ jobs:
           NEXT_PUBLIC_MORALIS_WEBHOOK: ${{ secrets.MORALIS_WEBHOOK }}
           # NextAuth
           NEXT_PUBLIC_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXT_PUBLIC_NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-          NEXT_PUBLIC_NEXTAUTH_DOMAIN: ${{ secrets.NEXTAUTH_DOMAIN }}
+          NEXT_PUBLIC_NEXTAUTH_URL: "https://mollybeach.github.io/token-gating-discord-bot-api"
+          NEXT_PUBLIC_NEXTAUTH_NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
+          NEXT_PUBLIC_DOMAIN: "https://mollybeach.github.io/token-gating-discord-bot-api"
           # API Endpoints
           NEXT_PUBLIC_USERS_ENDPOINT: ${{ secrets.USERS_ENDPOINT }}
           NEXT_PUBLIC_TOKENS_ENDPOINT: ${{ secrets.TOKENS_ENDPOINT }}
@@ -70,8 +71,18 @@ jobs:
           NEXT_PUBLIC_DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           NEXT_PUBLIC_DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
           NEXT_PUBLIC_DISCORD_USER_ID: ${{ secrets.DISCORD_USER_ID }}
+          # Role IDs
+          NEXT_PUBLIC_DISCORD_GRYFFINDOR_ROLE_ID: ${{ secrets.DISCORD_GRYFFINDOR_ROLE_ID }}
+          NEXT_PUBLIC_DISCORD_HUFFLEPUFF_ROLE_ID: ${{ secrets.DISCORD_HUFFLEPUFF_ROLE_ID }}
+          NEXT_PUBLIC_DISCORD_SLYTHERIN_ROLE_ID: ${{ secrets.DISCORD_SLYTHERIN_ROLE_ID }}
+          NEXT_PUBLIC_DISCORD_RAVENCLAW_ROLE_ID: ${{ secrets.DISCORD_RAVENCLAW_ROLE_ID }}
           # Environment
           NEXT_PUBLIC_NODE_ENV: production
+          # Contract
+          NEXT_PUBLIC_CONTRACT_ADDRESS: ${{ secrets.CONTRACT_ADDRESS }}
+
+  
+  
         run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
