@@ -49,8 +49,28 @@ jobs:
       - name: Build with Next.js
         working-directory: docs
         env:
-          NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_THIRDWEB_CLIENT_ID }}
-          NEXT_PUBLIC_THIRDWEB_SECRET_KEY: ${{ secrets.NEXT_PUBLIC_THIRDWEB_SECRET_KEY }}
+          # Thirdweb
+          NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{ secrets.THIRDWEB_CLIENT_ID }}
+          NEXT_PUBLIC_THIRDWEB_SECRET_KEY: ${{ secrets.THIRDWEB_SECRET_KEY }}
+          # Moralis
+          NEXT_PUBLIC_MORALIS_API_KEY: ${{ secrets.MORALIS_API_KEY }}
+          NEXT_PUBLIC_MORALIS_WEBHOOK: ${{ secrets.MORALIS_WEBHOOK }}
+          # NextAuth
+          NEXT_PUBLIC_NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXT_PUBLIC_NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_NEXTAUTH_DOMAIN: ${{ secrets.NEXTAUTH_DOMAIN }}
+          # API Endpoints
+          NEXT_PUBLIC_USERS_ENDPOINT: ${{ secrets.USERS_ENDPOINT }}
+          NEXT_PUBLIC_TOKENS_ENDPOINT: ${{ secrets.TOKENS_ENDPOINT }}
+          NEXT_PUBLIC_USERS_ENDPOINT_LOCAL: ${{ secrets.USERS_ENDPOINT_LOCAL }}
+          NEXT_PUBLIC_TOKENS_ENDPOINT_LOCAL: ${{ secrets.TOKENS_ENDPOINT_LOCAL }}
+          # Discord
+          NEXT_PUBLIC_DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
+          NEXT_PUBLIC_DISCORD_CLIENT_SECRET: ${{ secrets.DISCORD_CLIENT_SECRET }}
+          NEXT_PUBLIC_DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          NEXT_PUBLIC_DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+          NEXT_PUBLIC_DISCORD_USER_ID: ${{ secrets.DISCORD_USER_ID }}
+          # Environment
           NEXT_PUBLIC_NODE_ENV: production
         run: npm run build
       - name: Upload artifact
