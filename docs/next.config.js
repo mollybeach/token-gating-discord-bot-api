@@ -15,6 +15,7 @@ const nextConfig = {
       'github.com',
       'images.ctfassets.net',
       'cdn.wizardingworld.com', 
+      'res.cloudinary.com',
     ],
   },
   output: 'export', // Modern way to enable static export

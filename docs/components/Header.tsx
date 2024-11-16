@@ -44,7 +44,7 @@ const Header = () => {
           <Link href="/" className="flex items-center space-x-4 group">
             <div className="relative">
               <Image 
-                src="/hogwarts.png" 
+                src="https://res.cloudinary.com/storagemanagementcontainer/image/upload/v1731722312/portfolio/hogwarts_xxnn5c.png" 
                 alt="Hogwarts" 
                 width={48} 
                 height={48}

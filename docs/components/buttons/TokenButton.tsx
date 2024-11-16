@@ -13,7 +13,7 @@ export function TokenButton({ onClick }: TokenButtonProps) {
     >
       Buy Token
       <Image 
-        src="/hogwarts.png" 
+        src="https://res.cloudinary.com/storagemanagementcontainer/image/upload/v1731722312/portfolio/hogwarts_xxnn5c.png" 
         alt="Hogwarts" 
         width={24} 
         height={24}
