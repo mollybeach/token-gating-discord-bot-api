@@ -1,3 +1,4 @@
+// path: docs/pages/api/auth/auth.ts
 import type {
     GetServerSidePropsContext,
     NextApiRequest,

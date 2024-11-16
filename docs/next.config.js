@@ -64,6 +64,10 @@ const nextConfig = {
     process.env.NEXT_PUBLIC_NODE_ENV === "production"
       ? '/token-gating-discord-bot-api'
       : undefined,
+  assetPrefix:
+    process.env.NEXT_PUBLIC_NODE_ENV === "production"
+      ? '/token-gating-discord-bot-api/'
+      : undefined,
 };
 
 module.exports = nextConfig;

@@ -1,3 +1,4 @@
+// path: docs/pages/api/auth/[...nextauth].tsx
 import NextAuth, { NextAuthOptions } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 
@@ -9,6 +10,10 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
     }),
   ],
+  pages: {
+    error: '/auth/error',
+    signIn: '/auth/signin',
+  },
   secret: process.env.NEXTAUTH_SECRET,
 
   // When the user signs in, get their token
