@@ -53,7 +53,7 @@ export const HouseCrestSection: FC<HouseCrestSectionProps> = () => {
 
       {/* Centered Button */}
       <div className="mx-2">
-        <Link href="/sorting-hat">
+        <Link href="/sortinghat">
           <motion.button 
             type="button"
             whileHover={{ scale: 1.05 }}

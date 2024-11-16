@@ -4,6 +4,7 @@ import { ConnectWallet, darkTheme } from "@thirdweb-dev/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -76,11 +77,44 @@ const Header = () => {
           </Link>
 
           {/* Navigation Links with User Status */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             <NavLink href="/">Houses</NavLink>
             <NavLink href="/spells">Spells</NavLink>
             <NavLink href="/potions">Potions</NavLink>
             
+            {/* Sorting Hat Button */}
+            <Link href="/sortinghat">
+              <motion.button 
+                type="button"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="
+                  relative
+                  p-3
+                  rounded-lg 
+                  shadow-[0_0_15px_rgba(0,0,0,0.3)]
+                  border
+                  border-[#463366]/30
+                  transition-all
+                  duration-300
+                  hover:shadow-[0_0_25px_rgba(70,51,102,0.5)]
+                  group
+                  bg-gradient-to-r 
+                  from-[#2A1B3D] 
+                  to-[#1D4B43]
+                "
+              >
+                <Image 
+                  src="https://res.cloudinary.com/storagemanagementcontainer/image/upload/v1731724117/portfolio/sortinghat_qhloix.png"
+                  alt="Sorting Hat"
+                  width={80}
+                  height={80}
+                  className="relative z-10 transition-transform group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#351F4F] to-[#235D52] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg" />
+              </motion.button>
+            </Link>
+
             {/* Discord-style username display */}
             <div className="flex items-center gap-2">
               {/* Online status indicator */}
@@ -117,7 +151,7 @@ const Header = () => {
               "
             >
               <Image 
-                src="/hogwarts.png" 
+                src="https://res.cloudinary.com/storagemanagementcontainer/image/upload/v1731722312/portfolio/hogwarts_xxnn5c.png" 
                 alt="Hogwarts Contract" 
                 width={20} 
                 height={20}
