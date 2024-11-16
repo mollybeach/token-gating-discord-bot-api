@@ -9,7 +9,13 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['images.ctfassets.net'], // Add this for your image domains
+    domains: [
+      'images.ctfassets.net',
+      'raw.githubusercontent.com', // For GitHub repository images
+      'github.com',
+      'images.ctfassets.net',
+      'cdn.wizardingworld.com', 
+    ],
   },
   output: 'export', // Modern way to enable static export
   env: {

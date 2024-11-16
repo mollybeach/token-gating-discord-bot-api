@@ -1,5 +1,5 @@
 // components/LiveFeed.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface FeedItem {
     emoji: string;
@@ -61,6 +61,22 @@ const FEED_DATA = [
 ];
 
 const LiveFeed = () => {
+  const [feedItems, setFeedItems] = useState(FEED_DATA);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFeedItems(prevItems => {
+        const newItems = [...prevItems];
+        // Move last item to the top
+        const lastItem = newItems.pop()!;
+        newItems.unshift(lastItem);
+        return newItems;
+      });
+    }, 1000); // Rotate every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="
       bg-[#1A1A2E]/80 
@@ -72,47 +88,66 @@ const LiveFeed = () => {
       w-full 
       max-w-2xl 
       mx-auto 
-      overflow-y-auto 
-      max-h-[800px]
+      overflow-hidden 
       border
       border-[#463366]/20
-      scrollbar-thin
-      scrollbar-thumb-[#463366]
-      scrollbar-track-[#1A1A2E]
+      relative
     ">
       <h2 className="font-mystic text-2xl text-[#E4BC7F] mb-6 border-b border-[#463366]/30 pb-4">
         Live Discord Feed
       </h2>
-      <div className="space-y-3">
-        <style jsx global>{`
-          .feed-item {
-            transition: all 0.2s ease;
-          }
-          .feed-item:hover {
-            background: rgba(70, 51, 102, 0.2);
-            transform: translateX(4px);
-          }
-        `}</style>
-        {FEED_DATA.map((item, index) => (
-          <p 
-            key={index} 
+
+      {/* Fade overlay at top */}
+      <div className="absolute top-[4.5rem] left-0 right-0 h-8 bg-gradient-to-b from-[#1A1A2E] to-transparent z-10" />
+
+      <div className="
+        max-h-[800px] 
+        overflow-hidden
+        space-y-3
+      ">
+        {feedItems.map((item, index) => (
+          <div 
+            key={`${item.user}-${index}`}
             className="
+              transform
+              transition-transform
+              duration-1000
               feed-item 
               p-2 
               rounded 
               text-[#B8B8B8] 
               hover:text-[#E4BC7F]
               cursor-default
-              transition-all
-              duration-200
               hover:bg-[#463366]/20
-              hover:translate-x-1
+              animate-slideUp
             "
           >
             {item.emoji} [{item.user}]: {item.action}
-          </p>
+          </div>
         ))}
       </div>
+
+      {/* Fade overlay at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-[#1A1A2E] to-transparent" />
+
+      <style jsx global>{`
+        @keyframes slideUp {
+          0% {
+            transform: translateY(0);
+          }
+          100% {
+            transform: translateY(-100%);
+          }
+        }
+
+        .feed-item {
+          transition: all 0.2s ease;
+        }
+        .feed-item:hover {
+          background: rgba(70, 51, 102, 0.2);
+          transform: translateX(4px);
+        }
+      `}</style>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createThirdwebClient } from "thirdweb";
 import "../globals.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 // Initialize the QueryClient for React Query
 const queryClient = new QueryClient();
@@ -27,7 +28,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       >
         <SessionProvider session={session}>
           <Header />
-          <Component {...pageProps} client={client} />
+          <Component {...pageProps} client={client} session={session} />
+          <Footer />
         </SessionProvider>
       </ThirdwebProvider>
     </QueryClientProvider>

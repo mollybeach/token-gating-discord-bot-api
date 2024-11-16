@@ -1,30 +1,11 @@
-import { RoleButton } from "./buttons/RoleButton";
-import ConnectDiscordButton from "./buttons/ConnectDiscordButton";
-import GetSortedButton from "./buttons/GetSortedButton";
+import { HouseSection } from "../components/HouseSection";
+import { IntroSection } from "../components/IntroSection";
+import { HouseCrestSection } from "../components/HouseCrestSection";
 import LiveFeed from "../components/LiveFeed";
-import { HouseSection } from "./HouseSection";
-import { IntroSection } from "./IntroSection";
-import { HouseCrestSection } from "./HouseCrestSection";
-import { useSession } from "next-auth/react";
-import { useAddress } from "@thirdweb-dev/react";
 
-export function HomeContent() {
-  const address = useAddress();
-  const { data: session } = useSession();
-  async function requestGrantRole() {
-    try {
-      if (!address) return;
-      const response = await fetch("api/grant-role", {
-        method: "POST",
-        body: JSON.stringify({ address: address }),
-      });
-      const data = await response.json();
-      console.log(data);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+import type { NextPage } from 'next'
 
+const Houses: NextPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#1A1A2E] to-[#16213E]">
       <div className="grid grid-cols-12 gap-6 container mx-auto px-4 py-12">
@@ -39,24 +20,11 @@ export function HomeContent() {
               Step into a world where magic meets technology, where your journey begins...
             </p>
 
-            {/* Authentication Section */}
-            <div className="mt-12 mb-16 flex justify-center">
-              {!session && (
-                <ConnectDiscordButton />
-              )}
-              
-              {session && (
-                <div className="space-y-4">
-                  <GetSortedButton />
-                  <RoleButton 
-                    onClick={requestGrantRole}
-                    className="w-full bg-[#2A3B2A] hover:bg-[#364B36] text-white py-4 px-6 rounded-lg transition-all duration-300 shadow-green-900/20 shadow-lg"
-                  />
-                </div>
-              )}
-            </div>
-
             <HouseCrestSection />
+
+            {/* Authentication Section */}
+            <div className="mt-12 space-y-6 max-w-md mx-auto">
+            </div>
 
             <div className="mt-16">
               <IntroSection />
@@ -84,3 +52,4 @@ export function HomeContent() {
     </div>
   );
 }
+export default Houses

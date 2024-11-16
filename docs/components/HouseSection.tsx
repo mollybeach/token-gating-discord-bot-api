@@ -89,8 +89,69 @@ export const HouseSection: React.FC<HouseSectionProps> = ({
       ))}
 
       <div className="space-y-4">
-        <p>Once youve tried the <Link href="https://my.wizardingworld.com/sorting-hat" className="text-blue-600 hover:underline">Hogwarts Sorting Experience</Link>, you can find out more about your house, and how the houses came to be in the first place.</p>
-        <p>You can read more about the <Link href="/features/stories-of-the-hogwarts-founders" className="text-blue-600 hover:underline">founders of Hogwarts</Link> or the wily old <Link href="/writing-by-jk-rowling/the-sorting-hat" className="text-blue-600 hover:underline">Sorting Hat</Link> and even your <Link href="/features/hogwarts-ghosts" className="text-blue-600 hover:underline">house ghost</Link>.</p>
+      <p>Once youve tried the <Link 
+          href="https://my.wizardingworld.com/sorting-hat" 
+          className="
+            text-[#463366] 
+            hover:text-[#2A1B3D]
+            font-medium
+            transition-colors 
+            duration-300
+            border-b 
+            border-[#463366]/30
+            hover:border-[#463366]
+            px-0.5
+          "
+        >
+          Hogwarts Sorting Experience
+        </Link>, you can find out more about your house, and how the houses came to be in the first place.</p>
+        
+        <p>You can read more about the <Link 
+          href="/features/stories-of-the-hogwarts-founders" 
+          className="
+            text-[#463366] 
+            hover:text-[#2A1B3D]
+            font-medium
+            transition-colors 
+            duration-300
+            border-b 
+            border-[#463366]/30
+            hover:border-[#463366]
+            px-0.5
+          "
+        >
+          founders of Hogwarts
+        </Link> or the wily old <Link 
+          href="/writing-by-jk-rowling/the-sorting-hat" 
+          className="
+            text-[#463366] 
+            hover:text-[#2A1B3D]
+            font-medium
+            transition-colors 
+            duration-300
+            border-b 
+            border-[#463366]/30
+            hover:border-[#463366]
+            px-0.5
+          "
+        >
+          Sorting Hat
+        </Link> and even your <Link 
+          href="/features/hogwarts-ghosts" 
+          className="
+            text-[#463366] 
+            hover:text-[#2A1B3D]
+            font-medium
+            transition-colors 
+            duration-300
+            border-b 
+            border-[#463366]/30
+            hover:border-[#463366]
+            px-0.5
+          "
+        >
+          house ghost
+        </Link>.</p>
       </div>
     </section>
   );
